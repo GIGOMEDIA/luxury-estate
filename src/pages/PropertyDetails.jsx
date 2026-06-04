@@ -1,5 +1,6 @@
 import React from 'react';
 import Navbar from '../components/Navbar'; 
+import Footer from '../components/Footer';
 import PropertyGallery from '../components/property-details/PropertyGallery';
 import PropertyHeader from '../components/property-details/PropertyHeader';
 import PropertyOverview from '../components/property-details/PropertyOverview';
@@ -16,7 +17,7 @@ const PropertyDetails = () => {
         
         <PropertyGallery />
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 mt-8 lg:mt-12">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 mt-8 lg:mt-12 items-start">
           
           <div className="lg:col-span-2 space-y-8">
             <PropertyHeader />
@@ -25,7 +26,7 @@ const PropertyDetails = () => {
           </div>
 
           <div className="lg:col-span-1">
-            <div className="sticky top-6 lg:top-28">
+            <div className="sticky top-6 lg:top-28 self-start">
               <InquirySidebar />
             </div>
           </div>
@@ -35,6 +36,7 @@ const PropertyDetails = () => {
         <BottomDetails />
 
       </main>
+      <Footer />
     </div>
   );
 };
