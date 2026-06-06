@@ -1,6 +1,8 @@
 import React from 'react';
+
 import Navbar from '../components/Navbar'; 
 import Footer from '../components/Footer';
+
 import PropertyGallery from '../components/property-details/PropertyGallery';
 import PropertyHeader from '../components/property-details/PropertyHeader';
 import PropertyOverview from '../components/property-details/PropertyOverview';

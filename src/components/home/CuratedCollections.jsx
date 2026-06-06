@@ -18,7 +18,7 @@ const CuratedCollections = () => {
           <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
             Signature Styles
           </span>
-          <h2 className="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-[#002045] mt-1">
             Curated Collections
           </h2>
         </div>
@@ -30,22 +30,22 @@ const CuratedCollections = () => {
         </a>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center">
         {collectionsData.map((item) => (
           <div 
             key={item.id} 
-            className="group relative aspect-4/5 rounded-3xl overflow-hidden shadow-xs cursor-pointer bg-slate-950"
+            className="group relative w-full max-w-92 h-115 rounded-2xl overflow-hidden shadow-xs cursor-pointer bg-slate-950"
           >
-            <div className="absolute inset-0 bg-linear-to-t from-slate-950/80 via-transparent to-transparent z-10 transition-opacity duration-300 group-hover:opacity-90" />
-            
             <img 
               src={item.img} 
               alt={`${item.title} Collections`} 
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-103"
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
             />
 
-            <div className="absolute bottom-0 left-0 w-full p-8 z-20 text-white flex flex-col gap-1">
-              <h3 className="text-xl font-bold tracking-wide">
+            <div className="absolute inset-0 bg-linear-to-t from-black/80 via-black/0 to-transparent z-10 transition-opacity duration-300 group-hover:opacity-95" />
+            
+            <div className="absolute bottom-0 left-0 w-full p-6 z-20 text-white flex flex-col gap-1">
+              <h3 className="text-xl font-bold tracking-tight">
                 {item.title}
               </h3>
               <p className="text-xs font-medium text-slate-300/90">

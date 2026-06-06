@@ -2,8 +2,14 @@ import React from 'react'
 
 const CardListing = ({ imagePath, amount, placeName, noOfBeds, noOfBaths, area }) => {
   return (
-    <div className='max-w-80 bg-white rounded-2xl shadow-sm'>
-      <div className={`bg-[url('${imagePath}')] bg-cover bg-no-repeat bg-center h-50`}></div>
+    <div className='max-w-80 bg-white rounded-2xl shadow-sm overflow-hidden'>
+
+      <img 
+        src={imagePath} 
+        alt={placeName} 
+        className="w-full h-50 object-cover object-center"
+      />
+      
       <div className='px-4 py-2'>
         <p className='amount text-[#002045] text-2xl font-bold'>{amount}</p>
         <p className='place-name text-[#002045] font-medium text-lg'>{placeName}</p>
