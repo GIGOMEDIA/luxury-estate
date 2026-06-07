@@ -1,14 +1,14 @@
 import React from 'react'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
-import CardListing from './components/CardListing'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import AgentProfile from './pages/AgentProfile'
-import { Routes, Route } from 'react-router-dom'
 import PropertyDetails from './pages/PropertyDetails'
+import PropertySearch from './pages/PropertySearch'
 
 const App = () => {
   return (
     <Routes>
+      <Route path="/" element={<Navigate to="/properties" replace />} />
+      <Route path="/properties" element={<PropertySearch />} />
       <Route path="/agent-profile" element={<AgentProfile />} />
       <Route path="/property-details" element={<PropertyDetails />} />
     </Routes>
