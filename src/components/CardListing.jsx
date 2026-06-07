@@ -2,6 +2,7 @@ import React from 'react'
 
 const CardListing = ({ imagePath, amount, placeName, noOfBeds, noOfBaths, area, badge }) => {
   return (
+<<<<<<< HEAD
     <div className='bg-white rounded-2xl shadow-sm overflow-hidden'>
       <div className='relative'>
         <div className="h-48 bg-cover bg-no-repeat bg-center" style={{ backgroundImage: `url(${imagePath})` }}></div>
@@ -14,6 +15,17 @@ const CardListing = ({ imagePath, amount, placeName, noOfBeds, noOfBaths, area, 
       </div>
 
       <div className='px-4 py-4'>
+=======
+    <div className='max-w-80 bg-white rounded-2xl shadow-sm overflow-hidden'>
+
+      <img 
+        src={imagePath} 
+        alt={placeName} 
+        className="w-full h-50 object-cover object-center"
+      />
+      
+      <div className='px-4 py-2'>
+>>>>>>> c65b05634eb1c354e8f9c7480cc13f60a29cc954
         <p className='amount text-[#002045] text-2xl font-bold'>{amount}</p>
         <p className='place-name text-[#002045] font-medium text-lg'>{placeName}</p>
         <div className='flex justify-between py-3 border-t border-[#DCE9FF] mt-3 text-sm'>
