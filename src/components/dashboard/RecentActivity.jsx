@@ -22,7 +22,7 @@ const RecentActivity = () => {
         {activities.map((a, i) => (
           <div key={i} className="flex items-center justify-between gap-4 bg-slate-50 rounded-xl p-3">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-[#E6EEF9] flex items-center justify-center text-sm font-medium text-[#002045]">{a.name.split(' ').map(n=>n[0]).slice(0,2).join('')}</div>
+              <div className="w-10 h-10 rounded-full bg-[#E6EEF9] flex items-center justify-center text-sm font-medium text-[#002045]">{a.name.split(' ').map(n => n[0]).slice(0, 2).join('')}</div>
               <div>
                 <div className="font-medium text-[#0B2A52]">{a.name}</div>
                 <div className="text-sm text-[#6B7280]">{a.email}</div>
