@@ -5,6 +5,7 @@ import PropertyDetails from './pages/PropertyDetails'
 import PropertySearch from './pages/PropertySearch'
 import Dashboard from './pages/Dashboard'
 import AdvisoryAndAgents from './pages/AdvisoryAndAgents'
+import CuratedCollections from './pages/CuratedCollections'
 import Home from './pages/Home'
 
 const App = () => {
@@ -12,6 +13,7 @@ const App = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/properties" element={<PropertySearch />} />
+      <Route path="/collections" element={<CuratedCollections />} />
       <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/agents" element={<AdvisoryAndAgents />} />
       <Route path="/agent-profile" element={<AgentProfile />} />
