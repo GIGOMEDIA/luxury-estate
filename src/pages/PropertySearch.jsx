@@ -4,42 +4,20 @@ import Footer from '../components/Footer'
 import PropertyFilters from '../components/property-search/PropertyFilters'
 import PropertyResultCard from '../components/property-search/PropertyResultCard'
 import MapPanel from '../components/property-search/MapPanel'
-import WindowEstate from '../assets/primary-estate-view.png'
-import CoastEstate from '../assets/villa-azure.png'
-import ManorEstate from '../assets/historic.png'
-
-const properties = [
-  {
-    image: WindowEstate,
-    featured: true,
-    amount: '$12,450,000',
-    title: 'The Glass House Reserve',
-    address: '742 Park Avenue, Upper East Side, NY',
-    beds: '5',
-    baths: '6',
-    area: '4,200',
-  },
-  {
-    image: CoastEstate,
-    amount: '$8,900,000',
-    title: 'Chelsea Heights Duplex',
-    address: 'West 22nd Street, Manhattan, NY',
-    beds: '4',
-    baths: '4',
-    area: '3,150',
-  },
-  {
-    image: ManorEstate,
-    amount: '$15,200,000',
-    title: 'The Sovereign Estate',
-    address: 'Hudson Yards, Manhattan, NY',
-    beds: '6',
-    baths: '8',
-    area: '5,800',
-  },
-]
+import { apiRequest } from '../lib/backend'
+import { useBackendData } from '../hooks/useBackendData'
+import { resolvePropertyImage } from '../lib/media'
 
 const PropertySearch = () => {
+  const { data } = useBackendData(async () => {
+    const response = await apiRequest('/properties?limit=12&sort=featured')
+
+    return {
+      items: response.items || [],
+      total: response.total || 0,
+    }
+  }, [])
+
   return (
     <div className="min-h-screen bg-[#F3F6FC] text-[#002045]">
       <Navbar />
@@ -53,7 +31,7 @@ const PropertySearch = () => {
           <div className="space-y-5 lg:space-y-6">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight">Found 124 Results</h1>
+                <h1 className="text-3xl sm:text-4xl font-semibold tracking-tight">Found {data?.total || 0} Results</h1>
                 <p className="mt-1 text-sm text-[#616B7C]">Elite listings in Manhattan, NY</p>
               </div>
 
@@ -66,8 +44,19 @@ const PropertySearch = () => {
             </div>
 
             <div className="space-y-5 lg:space-y-6">
-              {properties.map((property) => (
-                <PropertyResultCard key={property.title} {...property} />
+              {(data?.items || []).map((property) => (
+                <PropertyResultCard
+                  key={property.id}
+                  slug={property.slug}
+                  image={resolvePropertyImage(property)}
+                  featured={property.featured}
+                  amount={property.amount}
+                  title={property.title}
+                  address={`${property.address}, ${property.city}, ${property.state}`}
+                  beds={property.beds}
+                  baths={property.baths}
+                  area={property.areaSqft?.toLocaleString('en-US')}
+                />
               ))}
             </div>
           </div>

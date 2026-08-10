@@ -1,8 +1,9 @@
 import React from 'react'
 import AdvisorCard from './AdvisorCard'
 import AdvisorImage1 from '../../assets/alexander-knight.jpg'
+import { resolveAgentImage } from '../../lib/media'
 
-const advisors = [
+const defaultAdvisors = [
   { name: 'Alexander Thorne', title: 'SENIOR MANAGING DIRECTOR', image: AdvisorImage1, tags: ['Institutional', 'Off-market'], featured: true },
   { name: 'Elena Moretti', title: 'GLOBAL RESIDENTIAL SPECIALIST', image: AdvisorImage1, tags: ['International', 'Concierge'] },
   { name: 'Julian Vance', title: 'VENTURE ASSETS LEAD', image: AdvisorImage1, tags: ['Commercial', 'Acquisitions'] },
@@ -13,13 +14,23 @@ const advisors = [
   { name: 'Amelia Rodriguez', title: 'ACQUISITIONS SPECIALIST', image: AdvisorImage1, tags: ['Commercial', 'Off-market'] },
 ]
 
-const AdvisorsGrid = () => {
+const AdvisorsGrid = ({ advisors = [], stats }) => {
+  const items = advisors.length
+    ? advisors.map((advisor) => ({
+        ...advisor,
+        image: resolveAgentImage(advisor),
+        tags: advisor.tags || [advisor.featured ? 'ELITE PARTNER' : 'Verified'],
+      }))
+    : defaultAdvisors
+
+  const totalLabel = stats?.featuredAgents || stats?.activeAgents ? `Showing ${stats.featuredAgents || items.length} featured of ${stats.activeAgents || items.length} verified partners.` : 'Showing 24 of 512 verified partners.'
+
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
       <div className="flex items-center justify-between mb-8">
         <div>
           <h2 className="text-2xl font-bold text-[#0B2A52]">Portfolio Advisors</h2>
-          <p className="text-sm text-[#6B7280] mt-1">Showing 24 of 512 verified partners.</p>
+          <p className="text-sm text-[#6B7280] mt-1">{totalLabel}</p>
         </div>
         <div className="flex items-center gap-2">
           <button className="p-2 rounded-lg border border-[#E5E7EB] hover:bg-[#F3F6FC]">
@@ -39,7 +50,7 @@ const AdvisorsGrid = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {advisors.map((advisor) => (
+        {items.map((advisor) => (
           <AdvisorCard key={advisor.name} {...advisor} />
         ))}
       </div>

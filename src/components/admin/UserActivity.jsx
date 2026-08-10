@@ -1,12 +1,23 @@
 import React from 'react';
 
-const activitiesData = [
+const defaultActivitiesData = [
   { id: 1, user: "Julianne Moore", action: "booked a virtual tour for", item: "The Reserve", time: "2 mins ago" },
   { id: 2, user: "Marcus Chen", action: "listed a new property in", item: "Aspen Ridge", time: "45 mins ago" },
   { id: 3, user: "Compliance alert", action: "Missing documentation for", item: "Listing #892", time: "1 hour ago", critical: true },
 ];
 
-const UserActivity = () => {
+const UserActivity = ({ items = [] }) => {
+  const activitiesData = items.length
+    ? items.map((item, index) => ({
+        id: item.id || index,
+        user: item.user,
+        action: item.action,
+        item: item.item,
+        time: item.time,
+        critical: item.critical,
+      }))
+    : defaultActivitiesData
+
   return (
     <section className="bg-white rounded-2xl border border-slate-100 shadow-xs p-6 lg:col-span-4 flex flex-col justify-between min-h-[300px]">
       <div>

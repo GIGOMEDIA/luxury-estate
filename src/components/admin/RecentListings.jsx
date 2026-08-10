@@ -1,13 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { resolvePropertyImage } from '../../lib/media'
 
-const listingsData = [
+const defaultListingsData = [
   { id: 1, name: "Bel Air Sky Garden", price: "$24,500,000", status: "ACTIVE", date: "Oct 24, 2023", img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=100&q=80" },
   { id: 2, name: "Azure Coast Villa", price: "$18,200,000", status: "PENDING", date: "Oct 22, 2023", img: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=100&q=80" },
   { id: 3, name: "The Penthouse V", price: "$12,900,000", status: "SOLD", date: "Oct 15, 2023", img: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=100&q=80" },
 ];
 
-const RecentListings = () => {
+const RecentListings = ({ items = [] }) => {
+  const listingsData = items.length
+    ? items.map((item) => ({
+        id: item.id,
+        name: item.title,
+        price: item.amount,
+        status: item.status?.toUpperCase() || 'ACTIVE',
+        date: item.createdAt ? new Date(item.createdAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Recently',
+        img: resolvePropertyImage(item),
+        slug: item.slug,
+      }))
+    : defaultListingsData
+
   return (
     <section className="bg-white rounded-2xl border border-slate-100 shadow-xs p-6 w-full flex flex-col">
       <div className="flex items-center justify-between mb-6">

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Check } from 'lucide-react';
 
-const PlanCards = ({ isAnnual }) => {
-  const tiers = [
+const PlanCards = ({ isAnnual, plans = [] }) => {
+  const defaultTiers = [
     {
       name: "Individual",
       desc: "For discerning private investors.",
@@ -31,6 +31,20 @@ const PlanCards = ({ isAnnual }) => {
       isPopular: false
     }
   ];
+
+  const tiers = plans.length
+    ? plans.map((plan) => ({
+        name: plan.title,
+        desc: plan.description,
+        monthlyPrice: plan.monthlyPrice,
+        annualPrice: plan.annualPrice,
+        priceLabel: plan.priceLabel,
+        subLabel: plan.subLabel,
+        features: plan.features,
+        cta: plan.featured ? 'Choose Featured Plan' : plan.billingCycle === 'annual' ? 'Choose Annual Plan' : 'Choose Plan',
+        isPopular: Boolean(plan.featured),
+      }))
+    : defaultTiers;
 
   return (
     <section className="max-w-7xl mx-auto px-6 pb-32 grid grid-cols-1 md:grid-cols-3 gap-8 items-stretch">

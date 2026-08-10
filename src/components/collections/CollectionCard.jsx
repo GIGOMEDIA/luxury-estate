@@ -9,7 +9,7 @@ const CollectionCard = ({ title, description, count, countLabel, image, featured
         <img src={image} alt={title} className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
 
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60" />
+      <div className="absolute inset-0 bg-linear-to-b from-transparent via-transparent to-black/60" />
 
       <div className="absolute inset-0 flex flex-col justify-between p-5 sm:p-6">
         <div className="flex justify-end">

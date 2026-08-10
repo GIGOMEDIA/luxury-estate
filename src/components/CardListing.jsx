@@ -1,8 +1,9 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-const CardListing = ({ imagePath, amount, placeName, noOfBeds, noOfBaths, area, badge }) => {
-  return (
-    <div className='bg-white rounded-2xl shadow-sm overflow-hidden'>
+const CardListing = ({ imagePath, amount, placeName, noOfBeds, noOfBaths, area, badge, slug }) => {
+  const content = (
+    <>
       <div className='relative'>
         <div className="h-48 bg-cover bg-no-repeat bg-center" style={{ backgroundImage: `url(${imagePath})` }}></div>
 
@@ -33,8 +34,10 @@ const CardListing = ({ imagePath, amount, placeName, noOfBeds, noOfBaths, area, 
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
+
+  return slug ? <Link to={`/property-details/${slug}`}>{content}</Link> : content
 }
 
 export default CardListing

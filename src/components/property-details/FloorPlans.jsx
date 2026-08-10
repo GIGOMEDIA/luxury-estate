@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import FloorPlan from '../../assets/floor-plans.png';
+import { resolveMediaUrl } from '../../lib/media';
 
-const FloorPlans = () => {
+const FloorPlans = ({ property }) => {
   const [activeLevel, setActiveLevel] = useState(1);
+  const floorPlans = property?.floorPlans || [];
+  const firstPlan = floorPlans[0]?.url;
+  const secondPlan = floorPlans[1]?.url;
 
   return (
     <div className="space-y-4 mt-8">
@@ -28,16 +32,24 @@ const FloorPlans = () => {
         {activeLevel === 1 ? (
           <div className="text-center space-y-4">
             <img 
-              src={FloorPlan} 
+              src={resolveMediaUrl(firstPlan) || FloorPlan} 
               alt="Floor Plan Level 1" 
               className="max-h-150 rounded-2xl object-contain mx-auto mix-blend-multiply opacity-80"
             />
           </div>
         ) : (
           <div className="text-center space-y-4">
-            <div className="w-64 h-64 border-2 border-dashed border-slate-200 rounded-2xl mx-auto flex items-center justify-center text-slate-400">
-               LEVEL 2 DIAGRAM WIDGET
-            </div>
+            {secondPlan ? (
+              <img
+                src={resolveMediaUrl(secondPlan)}
+                alt="Floor Plan Level 2"
+                className="max-h-150 rounded-2xl object-contain mx-auto mix-blend-multiply opacity-80"
+              />
+            ) : (
+              <div className="w-64 h-64 border-2 border-dashed border-slate-200 rounded-2xl mx-auto flex items-center justify-center text-slate-400">
+                 LEVEL 2 DIAGRAM WIDGET
+              </div>
+            )}
           </div>
         )}
       </div>

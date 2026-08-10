@@ -1,12 +1,12 @@
 import React from 'react';
 import { Bed, Bath, Maximize, Compass } from 'lucide-react';
 
-const PropertyHeader = () => {
+const PropertyHeader = ({ property }) => {
   const specs = [
-    { label: 'Bedrooms', value: '6', icon: <Bed className="w-5 h-5 text-slate-700" /> },
-    { label: 'Bathrooms', value: '8', icon: <Bath className="w-5 h-5 text-slate-700" /> },
-    { label: 'Square Feet', value: '12,450', icon: <Maximize className="w-5 h-5 text-slate-700" /> },
-    { label: 'Acres', value: '1.2', icon: <Compass className="w-5 h-5 text-slate-700" /> },
+    { label: 'Bedrooms', value: property?.beds ?? '6', icon: <Bed className="w-5 h-5 text-slate-700" /> },
+    { label: 'Bathrooms', value: property?.baths ?? '8', icon: <Bath className="w-5 h-5 text-slate-700" /> },
+    { label: 'Square Feet', value: property?.areaSqft?.toLocaleString('en-US') || '12,450', icon: <Maximize className="w-5 h-5 text-slate-700" /> },
+    { label: 'Acres', value: property?.acres || '1.2', icon: <Compass className="w-5 h-5 text-slate-700" /> },
   ];
 
   return (
@@ -14,14 +14,14 @@ const PropertyHeader = () => {
       <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
         <div>
           <span className="text-xs font-bold tracking-wider text-slate-400 uppercase">
-            Bel Air, Los Angeles
+            {property ? `${property.city}, ${property.state}` : 'Bel Air, Los Angeles'}
           </span>
           <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-950 mt-1">
-            The Obsidian Pavilion
+            {property?.title || 'The Obsidian Pavilion'}
           </h1>
         </div>
         <div className="sm:text-right mt-2 sm:mt-0">
-          <p className="text-3xl font-extrabold text-slate-900">$24,500,000</p>
+          <p className="text-3xl font-extrabold text-slate-900">{property?.amount || '$24,500,000'}</p>
           <p className="text-xs text-slate-400 mt-0.5">Est. Mortgage: $118,240 /mo</p>
         </div>
       </div>

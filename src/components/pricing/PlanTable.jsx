@@ -1,8 +1,8 @@
 import React from 'react';
 import { Check, X } from 'lucide-react';
 
-const PlanTable = () => {
-  const comparisonFeatures = [
+const PlanTable = ({ comparison }) => {
+  const defaultComparisonFeatures = [
     { name: "Priority Property Access", ind: true, prof: true, inst: true },
     { name: "Off-market Listings", ind: true, prof: true, inst: true },
     { name: "HD House Recordings", ind: "5 / month", prof: "20 / month", inst: "Unlimited" },
@@ -10,6 +10,9 @@ const PlanTable = () => {
     { name: "Market Prediction Engine", ind: false, prof: true, inst: true },
     { name: "API Integrations", ind: false, prof: false, inst: true },
   ];
+
+  const comparisonFeatures = comparison?.items || defaultComparisonFeatures;
+  const columns = comparison?.columns || ['Individual', 'Professional', 'Institutional'];
 
   const renderCell = (value) => {
     if (typeof value === 'boolean') {
@@ -32,9 +35,9 @@ const PlanTable = () => {
           <thead>
             <tr className="bg-[#002045] text-white text-base text-[20px]">
               <th className="p-6 md:p-7 font-black">Features</th>
-              <th className="p-6 md:p-7 font-black text-center">Individual</th>
-              <th className="p-6 md:p-7 font-black text-center">Professional</th>
-              <th className="p-6 md:p-7 font-black text-center">Institutional</th>
+              {columns.map((column) => (
+                <th key={column} className="p-6 md:p-7 font-black text-center">{column}</th>
+              ))}
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-100">

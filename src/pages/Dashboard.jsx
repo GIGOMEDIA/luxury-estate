@@ -6,8 +6,28 @@ import StatCard from '../components/dashboard/StatCard'
 import RecentActivity from '../components/dashboard/RecentActivity'
 import PerformanceCard from '../components/dashboard/PerformanceCard'
 import ListingManagement from '../components/dashboard/ListingManagement'
+import { apiRequest } from '../lib/backend'
+import { useBackendData } from '../hooks/useBackendData'
 
 const Dashboard = () => {
+  const { data } = useBackendData(async () => {
+    const [summary, recentActivity, performance, listings] = await Promise.all([
+      apiRequest('/dashboard/summary'),
+      apiRequest('/dashboard/recent-activity'),
+      apiRequest('/dashboard/performance'),
+      apiRequest('/dashboard/listings'),
+    ])
+
+    return {
+      summary: summary.cards || [],
+      recentActivity: recentActivity.items || [],
+      performance: performance.items || [],
+      insight: performance.insight,
+      listings: listings.items || [],
+      totals: listings,
+    }
+  }, [])
+
   return (
     <div className="min-h-screen bg-[#F3F6FC] text-[#002045]">
       <Navbar />
@@ -17,23 +37,22 @@ const Dashboard = () => {
 
         <main className="flex-1">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-            <StatCard title="Total Listings" value="1,248" delta="+12% vs last month" />
-            <StatCard title="Monthly Bookings" value="84" delta="+5.2% vs last month" />
-            <StatCard title="Revenue" value="$1.2M" delta="-2.1% seasonal" />
-            <StatCard title="Active Leads" value="312" delta="+24% campaign" />
+            {(data?.summary || []).map((card) => (
+              <StatCard key={card.title} title={card.title} value={card.value} delta={card.delta} />
+            ))}
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-6">
             <div className="lg:col-span-2">
-              <RecentActivity />
+              <RecentActivity items={data?.recentActivity || []} />
             </div>
             <div>
-              <PerformanceCard />
+              <PerformanceCard items={data?.performance || []} insight={data?.insight} />
             </div>
           </div>
 
           <div className="mt-6">
-            <ListingManagement />
+            <ListingManagement items={data?.listings || []} totalActive={data?.totals?.totalActive} totalPending={data?.totals?.totalPending} totalSold={data?.totals?.totalSold} />
           </div>
         </main>
       </div>

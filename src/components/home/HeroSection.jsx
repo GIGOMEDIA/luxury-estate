@@ -2,7 +2,10 @@ import React from 'react';
 import { Search, MapPin, Home, DollarSign } from 'lucide-react';
 import PrivateParadiseImg from '../../assets/private-paradise.png';
 
-const HeroSection = () => {
+const HeroSection = ({ content }) => {
+  const title = content?.title || 'Find Your Private Paradise'
+  const subtitle = content?.subtitle || "Access an exclusive portfolio of the world's most prestigious estates, curated for the discerning investor."
+
   return (
     <div className="relative w-full h-[80vh] min-h-155 bg-slate-50 overflow-hidden font-sans">
       
@@ -19,10 +22,10 @@ const HeroSection = () => {
         
         <div className="space-y-4">
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-[#002045] max-w-4xl">
-            Find Your Private Paradise
+            {title}
           </h1>
           <p className="text-sm sm:text-base text-[#645E5C]  max-w-xl mx-auto">
-            Access an exclusive portfolio of the world's most prestigious estates, curated for the discerning investor.
+            {subtitle}
           </p>
         </div>
 

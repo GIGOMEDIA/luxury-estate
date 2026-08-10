@@ -7,9 +7,28 @@ import UserActivity from '../components/admin/UserActivity';
 import NetworkLoad from '../components/admin/NetworkLoad';
 import HouseRecordings from '../components/admin/HouseRecordings';
 import Footer from '../components/Footer';
+import { apiRequest } from '../lib/backend'
+import { useBackendData } from '../hooks/useBackendData'
 
 const SystemAdmin = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const { data } = useBackendData(async () => {
+    const [stats, recentListings, userActivity, networkLoad, recordings] = await Promise.all([
+      apiRequest('/dashboard/admin-stats'),
+      apiRequest('/dashboard/listings'),
+      apiRequest('/dashboard/user-activity'),
+      apiRequest('/dashboard/network-load'),
+      apiRequest('/dashboard/recordings'),
+    ])
+
+    return {
+      cards: stats.cards || [],
+      recentListings: recentListings.items || [],
+      userActivity: userActivity.items || [],
+      networkLoad: networkLoad.items || [],
+      recordings: recordings.items || [],
+    }
+  }, [])
 
   return (
     <div className="flex flex-col lg:flex-row min-h-screen lg:h-screen w-screen bg-slate-50/70 text-slate-800 font-sans antialiased relative overflow-x-hidden">
@@ -29,20 +48,20 @@ const SystemAdmin = () => {
 
         <div className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-6 lg:space-y-8 no-scrollbar">
           
-          <StatCards />
+          <StatCards cards={data?.cards || []} />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
             <div className="grid grid-cols-1 lg:col-span-8 w-full overflow-hidden">
-              <RecentListings />
+              <RecentListings items={data?.recentListings || []} />
             </div>
             <div className="grid grid-cols-1 lg:col-span-4 flex-col gap-6 w-full">
-              <UserActivity />
-              <NetworkLoad />
+              <UserActivity items={data?.userActivity || []} />
+              <NetworkLoad items={data?.networkLoad || []} />
             </div>
           </div>
 
           <div className="w-full pb-6 lg:pb-4">
-            <HouseRecordings />
+            <HouseRecordings items={data?.recordings || []} />
           </div>
           
         </div>

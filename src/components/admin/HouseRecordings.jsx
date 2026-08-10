@@ -1,13 +1,25 @@
 import React from 'react';
 import { UploadCloud, Video } from 'lucide-react';
+import { resolveMediaUrl } from '../../lib/media'
 
-const videosData = [
+const defaultVideosData = [
   { id: 1, title: "Bel Air Manor Walkthrough", duration: "04:22", quality: "4K Resolution", status: "PUBLISHED", img: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=400&q=80" },
   { id: 2, title: "Skyline Penthouse Tour", duration: "78%", quality: "Processing...", status: "DRAFT", img: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=400&q=80" },
   { id: 3, title: "Hamptons Estate B-Roll", duration: "02:15", quality: "1080p HD", status: "PUBLISHED", img: "https://images.unsplash.com/photo-1513584684374-8bab748fbf90?auto=format&fit=crop&w=400&q=80" },
 ];
 
-const HouseRecordings = () => {
+const HouseRecordings = ({ items = [] }) => {
+  const videosData = items.length
+    ? items.map((item) => ({
+        id: item.id,
+        title: item.title,
+        duration: item.duration,
+        quality: item.quality,
+        status: item.status,
+        img: resolveMediaUrl(item.imageUrl || item.image || item.thumbnailUrl),
+      }))
+    : defaultVideosData
+
   return (
     <section className="bg-white rounded-2xl border border-slate-100 shadow-xs p-6 lg:col-span-8 space-y-6">
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">

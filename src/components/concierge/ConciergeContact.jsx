@@ -1,13 +1,17 @@
 import React from 'react'
 
-const ConciergeContact = () => {
+const ConciergeContact = ({ contact }) => {
+  const priorityLine = contact?.priorityLine || '+1 (800) LUXE-PRESTIGE'
+  const directEmail = contact?.directEmail || 'concierge@luxeestate.com'
+  const messagePrompt = contact?.messagePrompt || 'Request a confidential consultation today.'
+
   return (
     <section className="bg-[#EEF3FB] py-18 lg:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-2 gap-10 xl:gap-16 items-center">
         <div>
           <h2 className="text-[30px] sm:text-4xl font-medium text-[#00162E] mb-5 tracking-tight">Speak with an Advisor</h2>
           <p className="text-[#5B6470] text-sm sm:text-[15px] leading-relaxed max-w-136 mb-8">
-            Our concierge specialists are available 24/7 to provide discreet, high-performance solutions for your lifestyle needs. Request a confidential consultation today.
+            {messagePrompt}
           </p>
 
           <div className="space-y-4">
@@ -15,14 +19,14 @@ const ConciergeContact = () => {
               <div className="h-10 w-10 rounded-full bg-white shadow-sm flex items-center justify-center text-[#00162E] text-sm">☎</div>
               <div>
                 <p className="text-[11px] uppercase tracking-[0.22em] text-[#93A0B1] mb-0.5">Priority Line</p>
-                <p className="text-[#00162E] font-medium text-[15px]">+1 (800) LUXE-PRESTIGE</p>
+                <p className="text-[#00162E] font-medium text-[15px]">{priorityLine}</p>
               </div>
             </div>
             <div className="flex items-center gap-4">
               <div className="h-10 w-10 rounded-full bg-white shadow-sm flex items-center justify-center text-[#00162E] text-sm">✉</div>
               <div>
                 <p className="text-[11px] uppercase tracking-[0.22em] text-[#93A0B1] mb-0.5">Direct Email</p>
-                <p className="text-[#00162E] font-medium text-[15px]">concierge@luxeestate.com</p>
+                <p className="text-[#00162E] font-medium text-[15px]">{directEmail}</p>
               </div>
             </div>
           </div>

@@ -1,16 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import WaterfrontImg from '../../assets/Waterfall.png';
-import PenthouseImg from '../../assets/penthouse.png';
-import HistoricImg from '../../assets/historic.png';
+import { resolveMediaUrl } from '../../lib/media';
 
-const collectionsData = [
-  { id: 1, title: 'Waterfront', count: 124, img: WaterfrontImg },
-  { id: 2, title: 'Penthouse', count: 82, img: PenthouseImg },
-  { id: 3, title: 'Historic', count: 45, img: HistoricImg },
-];
+const defaultCollections = [
+  { id: 1, title: 'Waterfront', count: 124, img: resolveMediaUrl('/images/collections/coastal-moderns/cover.jpg') },
+  { id: 2, title: 'Penthouse', count: 82, img: resolveMediaUrl('/images/collections/penthouse-living/cover.jpg') },
+  { id: 3, title: 'Historic', count: 45, img: resolveMediaUrl('/images/collections/historic-manors/cover.jpg') },
+]
 
-const CuratedCollections = () => {
+const CuratedCollections = ({ collections = [] }) => {
+  const items = collections.length
+    ? collections.map((collection) => ({
+        id: collection.id,
+        title: collection.title,
+        count: collection.propertyIds?.length || collection.count || 0,
+        img: resolveMediaUrl(collection.coverImageUrl),
+      }))
+    : defaultCollections
+
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-36 pb-16 font-sans">
 
@@ -32,7 +39,7 @@ const CuratedCollections = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center">
-        {collectionsData.map((item) => (
+        {items.map((item) => (
           <div
             key={item.id}
             className="group relative w-full max-w-92 h-115 rounded-2xl overflow-hidden shadow-xs cursor-pointer bg-slate-950"

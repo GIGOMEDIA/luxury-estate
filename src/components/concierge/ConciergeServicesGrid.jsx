@@ -1,8 +1,9 @@
 import React from 'react'
 import InteriorView from '../../assets/interior-view.png'
 import VillaAzure from '../../assets/villa-azure.png'
+import { resolveMediaUrl } from '../../lib/media'
 
-const serviceCards = [
+const defaultServiceCards = [
   {
     title: 'Private Aviation Coordination',
     description: 'On-demand chartering, fleet management, and ground logistics across six continents.',
@@ -29,7 +30,16 @@ const serviceCards = [
   }
 ]
 
-const ConciergeServicesGrid = () => {
+const ConciergeServicesGrid = ({ services = [] }) => {
+  const serviceCards = services.length
+    ? services.map((service, index) => ({
+        title: service.title,
+        description: service.description,
+        image: resolveMediaUrl(service.icon || service.image || service.imageUrl) || (index === 0 ? InteriorView : VillaAzure),
+        span: index === 0 || index === services.length - 1 ? 'md:col-span-2' : '',
+      }))
+    : defaultServiceCards
+
   return (
     <section className="bg-[#F3F6FC] py-14 lg:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

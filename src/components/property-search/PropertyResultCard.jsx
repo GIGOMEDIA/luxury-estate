@@ -1,7 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-const PropertyResultCard = ({ image, featured, amount, title, address, beds, baths, area }) => {
-  return (
+const PropertyResultCard = ({ image, featured, amount, title, address, beds, baths, area, slug }) => {
+  const card = (
     <article className="bg-white rounded-2xl shadow-[0_10px_28px_rgba(15,38,84,0.08)] overflow-hidden border border-[#E8EEF7]">
       <div className="relative h-56 sm:h-64">
         <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: `url(${image})` }} />
@@ -53,6 +54,8 @@ const PropertyResultCard = ({ image, featured, amount, title, address, beds, bat
       </div>
     </article>
   )
+
+  return slug ? <Link to={`/property-details/${slug}`}>{card}</Link> : card
 }
 
 export default PropertyResultCard
