@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Search, Bell, User, Menu } from 'lucide-react';
 
 const AdminHeader = ({ onMenuClick }) => {
@@ -21,9 +22,9 @@ const AdminHeader = ({ onMenuClick }) => {
       <div className="flex items-center gap-8">
         
         <nav className="hidden lg:flex items-center gap-6 text-[14px] font-semibold text-slate-500">
-          <a href="#properties" className="hover:text-[#002045] transition-colors">Properties</a>
-          <a href="#collections" className="hover:text-[#002045] transition-colors">Collections</a>
-          <a href="#agents" className="hover:text-[#002045] transition-colors">Agents</a>
+          <Link to="/properties" className="hover:text-[#002045] transition-colors">Properties</Link>
+          <Link to="/collections" className="hover:text-[#002045] transition-colors">Collections</Link>
+          <Link to="/agents" className="hover:text-[#002045] transition-colors">Agents</Link>
         </nav>
 
         <div className="flex items-center gap-4">

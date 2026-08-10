@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const activities = [
   { name: 'Julianne Deville', email: 'julianne@vanguard.com', property: 'Azure Penthouse, Monaco', type: 'Viewing Request', status: 'CONFIRMED' },
@@ -15,7 +16,7 @@ const RecentActivity = () => {
     <div className="bg-white rounded-2xl p-6 shadow-sm border border-[#EEF3FA]">
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-semibold text-[#0B2A52]">Recent Activity</h3>
-        <a href="#" className="text-sm text-[#6B7280]">View All Transactions</a>
+        <Link to="/inquiries" className="text-sm text-[#6B7280]">View All Transactions</Link>
       </div>
 
       <div className="mt-4 space-y-4">

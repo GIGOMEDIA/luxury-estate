@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const AdvisorCard = ({ image, name, title, tags }) => {
   return (
@@ -28,12 +29,12 @@ const AdvisorCard = ({ image, name, title, tags }) => {
           </div>
         )}
 
-        <a href="#" className="inline-flex items-center gap-2 mt-4 text-sm font-medium text-[#0B2A52] group-hover:gap-3 transition-all">
+        <Link to="/agent-profile" className="inline-flex items-center gap-2 mt-4 text-sm font-medium text-[#0B2A52] group-hover:gap-3 transition-all">
           View Portfolio
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M1 8H15M10 3L15 8L10 13" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
-        </a>
+        </Link>
       </div>
     </div>
   )

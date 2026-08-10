@@ -43,7 +43,6 @@ const Navbar = ({ searchStyle }) => {
           <NavLink to="/collections" className={({ isActive }) => getNavItemClass(isActive)}>Collections</NavLink>
           <NavLink to="/concierge" className={({ isActive }) => getNavItemClass(isActive)}>Concierge</NavLink>
           <NavLink to="/agents" className={({ isActive }) => getNavItemClass(isActive)}>Agents</NavLink>
-          <NavLink to="/agents" className={({ isActive }) => getNavItemClass(isActive)}>Advisory</NavLink>
           <Link to="/inquiries" className='bg-[#002045] text-white px-5 py-1 rounded-4xl hover:bg-[#003366] transition-colors duration-300'>Inquire</Link>
         </div>
       </div>

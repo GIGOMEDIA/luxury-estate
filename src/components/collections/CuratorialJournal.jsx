@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import ArticleCard from './ArticleCard'
 
 const articles = [
@@ -30,9 +31,9 @@ const CuratorialJournal = () => {
           <h2 className="text-3xl font-bold text-[#0B2A52] mb-2">Curatorial Journal</h2>
           <p className="text-sm text-[#6B7280]">Analytical insights into luxury real estate trends</p>
         </div>
-        <a href="#" className="text-[#0B2A52] font-medium hover:text-[#0B2A52]/80 text-sm">
+        <Link to="/collections" className="text-[#0B2A52] font-medium hover:text-[#0B2A52]/80 text-sm">
           View All Articles →
-        </a>
+        </Link>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

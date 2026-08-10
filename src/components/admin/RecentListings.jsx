@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const listingsData = [
   { id: 1, name: "Bel Air Sky Garden", price: "$24,500,000", status: "ACTIVE", date: "Oct 24, 2023", img: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=100&q=80" },
@@ -11,7 +12,7 @@ const RecentListings = () => {
     <section className="bg-white rounded-2xl border border-slate-100 shadow-xs p-6 w-full flex flex-col">
       <div className="flex items-center justify-between mb-6">
         <h3 className="text-lg font-bold text-[#002045]">Recent Listings</h3>
-        <a href="#all" className="text-xs font-bold text-slate-500 hover:text-[#002045] hover:underline underline-offset-4">View all</a>
+        <Link to="/properties" className="text-xs font-bold text-slate-500 hover:text-[#002045] hover:underline underline-offset-4">View all</Link>
       </div>
       
       <div className="overflow-x-auto grow">

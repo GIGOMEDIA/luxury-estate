@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Globe, Mail } from 'lucide-react';
 
 const PlanFooter = () => {
@@ -14,10 +15,10 @@ const PlanFooter = () => {
         </div>
 
         <div className="flex flex-wrap gap-x-8 gap-y-4 text-xs font-black text-slate-300 tracking-wider">
-          <a href="#privacy" className="hover:text-white transition-colors">Privacy Policy</a>
-          <a href="#terms" className="hover:text-white transition-colors">Terms of Service</a>
-          <a href="#housing" className="hover:text-white transition-colors">Fair Housing</a>
-          <a href="#cookies" className="hover:text-white transition-colors">Cookie Preferences</a>
+          <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link>
+          <Link to="/terms-of-service" className="hover:text-white transition-colors">Terms of Service</Link>
+          <Link to="/fair-housing" className="hover:text-white transition-colors">Fair Housing</Link>
+          <Link to="/cookie-preferences" className="hover:text-white transition-colors">Cookie Preferences</Link>
         </div>
 
         <div className="flex items-center gap-4">

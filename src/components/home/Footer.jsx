@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Globe, Share2 } from 'lucide-react';
 
 const Footer = () => {
@@ -18,27 +19,27 @@ const Footer = () => {
           <div className="lg:col-span-2 space-y-4">
             <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Explore</h4>
             <ul className="space-y-2.5 text-xs sm:text-sm text-slate-300 font-medium">
-              <li><a href="#search" className="hover:text-white transition">Global Search</a></li>
-              <li><a href="#guide" className="hover:text-white transition">Investment Guide</a></li>
-              <li><a href="#guides" className="hover:text-white transition">City Guides</a></li>
+              <li><Link to="/properties" className="hover:text-white transition">Global Search</Link></li>
+              <li><Link to="/membership-plans" className="hover:text-white transition">Investment Guide</Link></li>
+              <li><Link to="/collections" className="hover:text-white transition">City Guides</Link></li>
             </ul>
           </div>
 
           <div className="lg:col-span-2 space-y-4">
             <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Company</h4>
             <ul className="space-y-2.5 text-xs sm:text-sm text-slate-300 font-medium">
-              <li><a href="#about" className="hover:text-white transition">About Us</a></li>
-              <li><a href="#careers" className="hover:text-white transition">Careers</a></li>
-              <li><a href="#press" className="hover:text-white transition">Press</a></li>
+              <li><Link to="/advisory" className="hover:text-white transition">About Us</Link></li>
+              <li><Link to="/inquiries" className="hover:text-white transition">Careers</Link></li>
+              <li><Link to="/system-admin" className="hover:text-white transition">Press</Link></li>
             </ul>
           </div>
 
           <div className="lg:col-span-3 space-y-4">
             <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Legal</h4>
             <ul className="space-y-2.5 text-xs sm:text-sm text-slate-300 font-medium">
-              <li><a href="#privacy" className="hover:text-white transition">Privacy Policy</a></li>
-              <li><a href="#terms" className="hover:text-white transition">Terms of Service</a></li>
-              <li><a href="#fair-housing" className="hover:text-white transition">Fair Housing</a></li>
+              <li><Link to="/privacy-policy" className="hover:text-white transition">Privacy Policy</Link></li>
+              <li><Link to="/terms-of-service" className="hover:text-white transition">Terms of Service</Link></li>
+              <li><Link to="/fair-housing" className="hover:text-white transition">Fair Housing</Link></li>
             </ul>
           </div>
 

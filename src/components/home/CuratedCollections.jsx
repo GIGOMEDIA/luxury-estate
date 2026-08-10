@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import WaterfrontImg from '../../assets/Waterfall.png';
 import PenthouseImg from '../../assets/penthouse.png';
 import HistoricImg from '../../assets/historic.png';
@@ -22,12 +23,12 @@ const CuratedCollections = () => {
             Curated Collections
           </h2>
         </div>
-        <a 
-          href="#collections" 
+        <Link 
+          to="/collections" 
           className="text-xs font-bold text-slate-900 underline underline-offset-4 hover:text-slate-700 transition"
         >
           View All Collections
-        </a>
+        </Link>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center">

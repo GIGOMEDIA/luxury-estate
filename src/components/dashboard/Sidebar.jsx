@@ -1,11 +1,12 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const items = [
-  'Dashboard',
-  'Listings',
-  'Bookings',
-  'Analytics',
-  'Team',
+  { label: 'Dashboard', to: '/dashboard' },
+  { label: 'Listings', to: '/properties' },
+  { label: 'Bookings', to: '/inquiries' },
+  { label: 'Analytics', to: '/system-admin' },
+  { label: 'Team', to: '/agents' },
 ]
 
 const Sidebar = () => {
@@ -19,8 +20,8 @@ const Sidebar = () => {
       <nav className="flex-1 mt-6">
         <ul className="space-y-2">
           {items.map((it) => (
-            <li key={it} className={`px-3 py-2 rounded-lg ${it === 'Dashboard' ? 'bg-[#0B2A52] text-white' : 'text-[#334155] hover:bg-slate-50'}`}>
-              <a href="#" className="block text-sm font-medium">{it}</a>
+            <li key={it.label} className={`px-3 py-2 rounded-lg ${it.label === 'Dashboard' ? 'bg-[#0B2A52] text-white' : 'text-[#334155] hover:bg-slate-50'}`}>
+              <Link to={it.to} className="block text-sm font-medium">{it.label}</Link>
             </li>
           ))}
         </ul>
