@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 const AdvisorCard = ({ image, name, title, tags }) => {
   return (
     <div className="group bg-white rounded-xl overflow-hidden shadow-sm border border-[#E5E7EB] hover:shadow-lg transition-shadow">
-      <div className="relative h-72 bg-gradient-to-br from-slate-200 to-slate-300">
+      <div className="relative h-72 bg-linear-to-br from-slate-200 to-slate-300">
         <img src={image} alt={name} className="w-full h-full object-cover" />
         {tags && tags[0] === 'ELITE PARTNER' && (
           <div className="absolute top-3 left-3 bg-[#0B2A52] text-white text-[10px] font-bold px-3 py-1.5 rounded">
