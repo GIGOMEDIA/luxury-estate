@@ -14,7 +14,7 @@ const Sidebar = () => {
     <aside className="hidden md:flex flex-col w-64 h-screen sticky top-0 bg-white border-r border-[#EEF3FA] px-4 py-6">
       <div className="mb-6">
         <div className="text-[#002045] font-bold text-lg">LUXE ESTATE</div>
-        <p className="text-sm text-slate-500 mt-2">Elite Portfolio<br/>Institutional Access</p>
+        <p className="text-sm text-slate-500 mt-2">Elite Portfolio<br />Institutional Access</p>
       </div>
 
       <nav className="flex-1 mt-6">

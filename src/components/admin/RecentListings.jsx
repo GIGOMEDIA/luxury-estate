@@ -14,7 +14,7 @@ const RecentListings = () => {
         <h3 className="text-lg font-bold text-[#002045]">Recent Listings</h3>
         <Link to="/properties" className="text-xs font-bold text-slate-500 hover:text-[#002045] hover:underline underline-offset-4">View all</Link>
       </div>
-      
+
       <div className="overflow-x-auto grow">
         <table className="w-full text-left border-collapse">
           <thead>
@@ -35,10 +35,9 @@ const RecentListings = () => {
                 </td>
                 <td className="py-3.5 px-4">{listing.price}</td>
                 <td className="py-3.5 px-4">
-                  <span className={`px-2 py-1 rounded-md text-[10px] font-bold tracking-wide ${
-                    listing.status === 'ACTIVE' ? 'bg-emerald-50 text-emerald-700' :
-                    listing.status === 'PENDING' ? 'bg-amber-50 text-amber-700' : 'bg-slate-100 text-slate-600'
-                  }`}>
+                  <span className={`px-2 py-1 rounded-md text-[10px] font-bold tracking-wide ${listing.status === 'ACTIVE' ? 'bg-emerald-50 text-emerald-700' :
+                      listing.status === 'PENDING' ? 'bg-amber-50 text-amber-700' : 'bg-slate-100 text-slate-600'
+                    }`}>
                     {listing.status}
                   </span>
                 </td>

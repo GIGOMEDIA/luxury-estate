@@ -6,7 +6,7 @@ const PlanFooter = () => {
   return (
     <footer className="bg-[#002045] text-white pt-20 pb-12 px-6 sm:px-12 border-t border-white/5">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-10 ">
-        
+
         <div className="space-y-3">
           <div className="text-2xl font-black tracking-wider">LUXE ESTATE</div>
           <p className="text-[13px] font-bold text-slate-400 tracking-wide max-w-sm leading-relaxed">
@@ -31,7 +31,7 @@ const PlanFooter = () => {
         </div>
 
       </div>
-      
+
     </footer>
   );
 };

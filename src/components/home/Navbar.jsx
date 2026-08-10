@@ -9,7 +9,7 @@ const Navbar = () => {
     <nav className="w-full bg-white border-b border-slate-100 font-sans sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
-          
+
           <div className="shrink-0">
             <Link to="/" className="text-xl font-black tracking-wider text-[#002045]">
               LUXE ESTATE
@@ -37,9 +37,9 @@ const Navbar = () => {
           <div className="hidden lg:flex items-center gap-6">
             <div className="relative flex items-center">
               <Search className="w-4 h-4 text-slate-400 absolute left-3 pointer-events-none" />
-              <input 
-                type="text" 
-                placeholder="Global search..." 
+              <input
+                type="text"
+                placeholder="Global search..."
                 className="pl-9 pr-4 py-2 w-48 bg-slate-50 border border-slate-100 rounded-full text-xs font-medium text-slate-800 placeholder-slate-400 focus:outline-hidden focus:w-56 transition-all duration-300"
               />
             </div>
@@ -54,8 +54,8 @@ const Navbar = () => {
           </div>
 
           <div className="flex lg:hidden items-center">
-            <button 
-              onClick={() => setIsOpen(!isOpen)} 
+            <button
+              onClick={() => setIsOpen(!isOpen)}
               className="text-[#002045] hover:text-slate-600 transition focus:outline-hidden"
             >
               {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

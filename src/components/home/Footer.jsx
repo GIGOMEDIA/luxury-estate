@@ -6,9 +6,9 @@ const Footer = () => {
   return (
     <footer className="w-full bg-[#002045] text-white font-sans pt-16 pb-8 mt-auto">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-12">
-          
+
           <div className="lg:col-span-5 space-y-4 max-w-sm">
             <h3 className="text-xl font-black tracking-wider">LUXE ESTATE</h3>
             <p className="text-slate-300 text-xs sm:text-sm font-normal leading-relaxed">
@@ -49,7 +49,7 @@ const Footer = () => {
           <p className="text-[11px] text-slate-400 font-medium text-center sm:text-left">
             © 2026 LuxeEstate International. Curated Real Estate Excellence.
           </p>
-          
+
           <div className="flex items-center gap-4 text-slate-400">
             <button className="hover:text-white transition cursor-pointer">
               <Globe className="w-4 h-4" />
