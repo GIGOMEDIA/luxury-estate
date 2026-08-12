@@ -1,3 +1,4 @@
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 import PrimaryEstateView from '../assets/primary-estate-view.png'
 import InteriorView from '../assets/interior-view.png'
 import KitchenView from '../assets/kitchen.png'
