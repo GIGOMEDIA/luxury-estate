@@ -7,15 +7,34 @@ import UserActivity from '../components/admin/UserActivity';
 import NetworkLoad from '../components/admin/NetworkLoad';
 import HouseRecordings from '../components/admin/HouseRecordings';
 import Footer from '../components/Footer';
+import { apiRequest } from '../lib/backend';
+import { useBackendData } from '../hooks/useBackendData';
 
 const SystemAdmin = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
+  const { data, loading, error } = useBackendData(async () => {
+    const [stats, recentListings, userActivity, networkLoad, recordings] = await Promise.all([
+      apiRequest('/dashboard/admin-stats').catch(() => ({ cards: [] })),
+      apiRequest('/dashboard/listings').catch(() => ({ items: [] })),
+      apiRequest('/dashboard/user-activity').catch(() => ({ items: [] })),
+      apiRequest('/dashboard/network-load').catch(() => ({ items: [] })),
+      apiRequest('/dashboard/recordings').catch(() => ({ items: [] })),
+    ]);
+
+    return {
+      cards: stats?.cards || stats || [],
+      recentListings: recentListings?.items || recentListings || [],
+      userActivity: userActivity?.items || userActivity || [],
+      networkLoad: networkLoad?.items || networkLoad || [],
+      recordings: recordings?.items || recordings || [],
+    };
+  }, []);
+
   return (
     <div className="flex flex-col lg:flex-row min-h-screen lg:h-screen w-screen bg-slate-50/70 text-slate-800 font-sans antialiased relative overflow-x-hidden">
-      
       {sidebarOpen && (
-        <div 
+        <div
           className="fixed inset-0 bg-black/40 z-40 lg:hidden backdrop-blur-xs transition-opacity duration-300"
           onClick={() => setSidebarOpen(false)}
         />
@@ -24,30 +43,35 @@ const SystemAdmin = () => {
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
       <div className="flex-1 lg:pl-64 flex flex-col min-h-screen lg:h-screen relative w-full">
-        
         <AdminHeader onMenuClick={() => setSidebarOpen(true)} />
 
         <div className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 space-y-6 lg:space-y-8 no-scrollbar">
-          
-          <StatCards />
+          {error && (
+            <div className="p-4 bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl">
+              Failed to load system dashboard telemetry. Please try refreshing.
+            </div>
+          )}
+
+          <StatCards cards={data?.cards} loading={loading} />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
             <div className="grid grid-cols-1 lg:col-span-8 w-full overflow-hidden">
-              <RecentListings />
+              <RecentListings items={data?.recentListings} loading={loading} />
             </div>
-            <div className="grid grid-cols-1 lg:col-span-4 flex-col gap-6 w-full">
-              <UserActivity />
-              <NetworkLoad />
+            <div className="grid grid-cols-1 lg:col-span-4 flex-col gap-6 w-full space-y-6">
+              <UserActivity items={data?.userActivity} loading={loading} />
+              <NetworkLoad items={data?.networkLoad} loading={loading} />
             </div>
           </div>
 
           <div className="w-full pb-6 lg:pb-4">
-            <HouseRecordings />
+            <HouseRecordings items={data?.recordings} loading={loading} />
           </div>
-          
         </div>
-      <Footer/>
-        
+
+        <Footer />
+
+        {/* Quick Action Floating Button */}
         <div className="fixed bottom-24 right-4 sm:right-8 z-40 group flex items-center gap-3">
           <button className="px-4 py-2.5 bg-[#002045] text-white text-xs font-bold rounded-xl shadow-lg 
             opacity-0 translate-x-4 pointer-events-none scale-95
@@ -62,7 +86,6 @@ const SystemAdmin = () => {
             </span>
           </button>
         </div>
-
       </div>
     </div>
   );

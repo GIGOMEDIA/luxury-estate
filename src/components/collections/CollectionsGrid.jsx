@@ -1,48 +1,47 @@
 import React from 'react'
 import CollectionCard from './CollectionCard'
-import CoastalImage from '../../assets/coastal-estate.png'
-import PenthouseImage from '../../assets/penthouse.png'
-import HistoricImage from '../../assets/historic.png'
-import MountainImage from '../../assets/mountain-modern.png'
+import { resolveMediaUrl } from '../../lib/media'
 
-const collections = [
-  {
-    title: 'Coastal Moderns',
-    description: 'Where geometric precision meets the organic rhythm of the shoreline',
-    count: 17,
-    countLabel: 'Available Estates',
-    image: CoastalImage,
-    featured: true
-  },
-  {
-    title: 'Penthouse Living',
-    description: 'Commanding views from the world\'s most iconic vertical landscapes',
-    count: 9,
-    countLabel: 'Properties',
-    image: PenthouseImage
-  },
-  {
-    title: 'Historic Manors',
-    description: 'Timeless legacies preserved in stone, by and centuries of artisan craft',
-    count: 8,
-    countLabel: 'Properties',
-    image: HistoricImage
-  },
-  {
-    title: 'Mountain Sanctuaries',
-    description: 'Elevated retreats designed for solitude, reflection, and boundless privacy',
-    count: 10,
-    countLabel: 'Archived Listings',
-    image: MountainImage
+const CollectionsGrid = ({ collections = [], loading = false }) => {
+  if (loading) {
+    return (
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="h-64 sm:h-72 lg:h-80 bg-slate-200 rounded-2xl animate-pulse" />
+          ))}
+        </div>
+      </section>
+    )
   }
-]
 
-const CollectionsGrid = () => {
+  if (!collections.length) {
+    return (
+      <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div className="text-center py-16 bg-slate-50 border border-dashed border-slate-200 rounded-2xl p-8">
+          <h3 className="text-lg font-bold text-[#0B2A52]">No Collections Available</h3>
+          <p className="text-sm text-slate-500 mt-1 max-w-md mx-auto">
+            Our editorial anthologies are currently being updated with new estates. Please check back shortly.
+          </p>
+        </div>
+      </section>
+    )
+  }
+
   return (
     <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-        {collections.map((collection) => (
-          <CollectionCard key={collection.title} {...collection} />
+        {collections.map((collection, idx) => (
+          <CollectionCard
+            key={collection.id || collection._id || collection.title || idx}
+            id={collection.id || collection._id}
+            title={collection.title || collection.name}
+            description={collection.description}
+            count={collection.count || collection.itemCount || 0}
+            countLabel={collection.countLabel || 'Estates'}
+            image={resolveMediaUrl(collection.image || collection.coverImage || collection.imageUrl)}
+            slug={collection.slug}
+          />
         ))}
       </div>
     </section>

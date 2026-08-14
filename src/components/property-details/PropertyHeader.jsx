@@ -1,12 +1,25 @@
 import React from 'react';
 import { Bed, Bath, Maximize, Compass } from 'lucide-react';
 
-const PropertyHeader = () => {
+const PropertyHeader = ({ property, loading = false }) => {
+  if (loading) {
+    return (
+      <div className="space-y-6 animate-pulse">
+        <div className="h-8 bg-slate-200 rounded-md w-1/2"></div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="h-20 bg-slate-200 rounded-2xl"></div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   const specs = [
-    { label: 'Bedrooms', value: '6', icon: <Bed className="w-5 h-5 text-slate-700" /> },
-    { label: 'Bathrooms', value: '8', icon: <Bath className="w-5 h-5 text-slate-700" /> },
-    { label: 'Square Feet', value: '12,450', icon: <Maximize className="w-5 h-5 text-slate-700" /> },
-    { label: 'Acres', value: '1.2', icon: <Compass className="w-5 h-5 text-slate-700" /> },
+    { label: 'Bedrooms', value: property?.beds ?? '--', icon: <Bed className="w-5 h-5 text-slate-700" /> },
+    { label: 'Bathrooms', value: property?.baths ?? '--', icon: <Bath className="w-5 h-5 text-slate-700" /> },
+    { label: 'Square Feet', value: property?.areaSqft?.toLocaleString('en-US') || property?.area || '--', icon: <Maximize className="w-5 h-5 text-slate-700" /> },
+    { label: 'Acres', value: property?.acres || '--', icon: <Compass className="w-5 h-5 text-slate-700" /> },
   ];
 
   return (
@@ -14,15 +27,14 @@ const PropertyHeader = () => {
       <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-2">
         <div>
           <span className="text-xs font-bold tracking-wider text-slate-400 uppercase">
-            Bel Air, Los Angeles
+            {property?.city ? `${property.city}${property.state ? `, ${property.state}` : ''}` : 'Location Unlisted'}
           </span>
           <h1 className="text-3xl md:text-4xl font-extrabold tracking-tight text-slate-950 mt-1">
-            The Obsidian Pavilion
+            {property?.title || 'Estate Overview'}
           </h1>
         </div>
         <div className="sm:text-right mt-2 sm:mt-0">
-          <p className="text-3xl font-extrabold text-slate-900">$24,500,000</p>
-          <p className="text-xs text-slate-400 mt-0.5">Est. Mortgage: $118,240 /mo</p>
+          <p className="text-3xl font-extrabold text-slate-900">{property?.amount || property?.price || 'Price Upon Request'}</p>
         </div>
       </div>
 

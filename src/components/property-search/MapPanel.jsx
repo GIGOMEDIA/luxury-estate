@@ -1,44 +1,69 @@
 import React from 'react'
-import PrimaryEstateView from '../../assets/primary-estate-view.png'
 
 const Marker = ({ label, className }) => (
-  <div className={`absolute ${className} flex flex-col items-center`}>
-    <span className="rounded-full bg-white px-3 py-1 text-xs font-semibold text-[#0B2A52] shadow-lg">
+  <div className={`absolute ${className} flex flex-col items-center transform -translate-x-1/2 -translate-y-1/2 z-10 hover:scale-110 transition-transform cursor-pointer`}>
+    <span className="rounded-full bg-[#002045] text-white px-3 py-1 text-[11px] font-bold shadow-xl border border-white/20">
       {label}
     </span>
-    <span className="h-4 w-px bg-[#0B2A52] opacity-60" />
+    <span className="h-3 w-0.5 bg-[#002045]" />
   </div>
 )
 
-const MapPanel = () => {
+const MapPanel = ({ properties = [], loading = false }) => {
   return (
-    <section className="relative min-h-140 lg:min-h-205 overflow-hidden rounded-none lg:rounded-l-3xl bg-slate-700 shadow-[0_10px_28px_rgba(15,38,84,0.08)]">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_35%_24%,rgba(255,255,255,0.12),transparent_24%),linear-gradient(145deg,#687688_0%,#8794a4_32%,#6f7a88_58%,#53616f_100%)]" />
-      <div className="absolute inset-0 opacity-40 mix-blend-screen" style={{ backgroundImage: `url(${PrimaryEstateView})`, backgroundSize: 'cover', backgroundPosition: 'center', filter: 'grayscale(1) blur(2px)' }} />
-      <div className="absolute inset-0 bg-[#2b3541]/55" />
+    <section className="relative min-h-100 lg:min-h-162.5 overflow-hidden rounded-2xl lg:rounded-l-3xl bg-slate-800 shadow-md border border-slate-700/50">
+      <div className="absolute inset-0 bg-slate-900" />
 
-      <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: 'linear-gradient(rgba(255,255,255,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.07) 1px, transparent 1px)', backgroundSize: '120px 120px' }} />
-      <div className="absolute inset-0 opacity-50" style={{ backgroundImage: 'radial-gradient(circle at 20% 70%, rgba(255,255,255,0.2) 0 2px, transparent 2px), radial-gradient(circle at 72% 53%, rgba(255,255,255,0.16) 0 2px, transparent 2px), radial-gradient(circle at 60% 86%, rgba(255,255,255,0.16) 0 2px, transparent 2px)', backgroundSize: '240px 240px' }} />
+      {/* Map Graphic Overlay */}
+      <div
+        className="absolute inset-0 opacity-20 mix-blend-screen bg-cover bg-center filter grayscale"
+        style={{ backgroundImage: `url('https://images.unsplash.com/photo-1524661135-423995f22d0b?auto=format&fit=crop&w=1200&q=80')` }}
+      />
 
-      <div className="absolute left-4 sm:left-6 top-20 flex flex-col gap-3 z-20">
-        <button className="size-10 rounded-lg bg-white text-[#002045] shadow-md">+</button>
-        <button className="size-10 rounded-lg bg-white text-[#002045] shadow-md">−</button>
-        <button className="size-10 rounded-lg bg-white text-[#002045] shadow-md flex items-center justify-center">
-          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="9" cy="9" r="5" stroke="#002045" strokeWidth="1.6" />
-            <circle cx="9" cy="9" r="1.6" fill="#002045" />
-          </svg>
-        </button>
+      {/* Grid Pattern Lines */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: 'linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)',
+          backgroundSize: '80px 80px'
+        }}
+      />
+
+      {/* Zoom Controls */}
+      <div className="absolute left-4 sm:left-6 top-6 flex flex-col gap-2 z-20">
+        <button className="size-9 rounded-lg bg-white/90 text-[#002045] font-bold shadow-md hover:bg-white transition cursor-pointer flex items-center justify-center">+</button>
+        <button className="size-9 rounded-lg bg-white/90 text-[#002045] font-bold shadow-md hover:bg-white transition cursor-pointer flex items-center justify-center">−</button>
       </div>
 
-      <Marker label="$12.4M" className="left-[44%] top-[33%]" />
-      <Marker label="$15.2M" className="right-[18%] top-[48%]" />
-      <Marker label="$8.9M" className="right-[28%] bottom-[24%]" />
+      {/* Render Dynamic Property Markers */}
+      {!loading && properties.length > 0 ? (
+        properties.slice(0, 5).map((item, index) => {
+          const positions = [
+            'left-[40%] top-[30%]',
+            'left-[65%] top-[45%]',
+            'left-[30%] top-[60%]',
+            'left-[75%] top-[25%]',
+            'left-[50%] top-[70%]',
+          ]
+          return (
+            <Marker
+              key={item.id || item._id || index}
+              label={item.amount || item.price || 'Inquire'}
+              className={positions[index % positions.length]}
+            />
+          )
+        })
+      ) : (
+        <div className="absolute inset-0 flex items-center justify-center text-slate-400 text-xs font-semibold">
+          {loading ? 'Plotting estate coordinates...' : 'Interactive map bounds ready'}
+        </div>
+      )}
 
+      {/* Bottom Mode Switcher */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20">
-        <div className="inline-flex items-center rounded-full bg-[#0B2A52] p-1 shadow-lg">
-          <button className="rounded-full bg-[#0A2242] px-5 py-2 text-xs font-medium text-white">Map View</button>
-          <button className="rounded-full px-5 py-2 text-xs font-medium text-white/65">Grid View</button>
+        <div className="inline-flex items-center rounded-full bg-[#002045] p-1 shadow-lg border border-white/10">
+          <button className="rounded-full bg-white/15 px-5 py-1.5 text-xs font-bold text-white cursor-pointer">Map View</button>
+          <button className="rounded-full px-5 py-1.5 text-xs font-bold text-slate-300 hover:text-white cursor-pointer">Satellite</button>
         </div>
       </div>
     </section>
