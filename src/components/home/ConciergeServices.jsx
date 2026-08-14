@@ -1,16 +1,16 @@
 import React from 'react';
-import AdvisorImg from '../../assets/advisor.png';
+import { Link } from 'react-router-dom';
 
 const ConciergeServices = () => {
   return (
-    <section className="w-full bg-[#002045] py-1 px-4 sm:px-12 lg:px-24 font-sans mb-1">
-      <div className="max-w-7xl mx-auto bg-[#002045] overflow-hidden p-8 sm:p-12 lg:p-16">
+    <section className="w-full bg-[#002045] py-16 px-4 sm:px-12 lg:px-24 font-sans">
+      <div className="max-w-7xl mx-auto overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          <div className="lg:col-span-5 w-full h-87.5 sm:h-112.5 rounded-2xl overflow-hidden shadow-lg">
-            <img 
-              src={AdvisorImg} 
-              alt="Elevated Real Estate Advisor" 
+
+          <div className="lg:col-span-5 w-full h-87.5 sm:h-112.5 rounded-2xl overflow-hidden shadow-2xl relative bg-slate-900">
+            <img
+              src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80"
+              alt="Elevated Real Estate Advisor"
               className="w-full h-full object-cover object-top"
             />
           </div>
@@ -24,18 +24,24 @@ const ConciergeServices = () => {
                 Elevated Real Estate <br className="hidden sm:inline" /> Concierge Services
               </h2>
             </div>
-            
+
             <p className="text-slate-300 text-sm sm:text-base font-normal leading-relaxed max-w-xl">
               From off-market acquisitions to global portfolio management, our advisory team provides the insight and discretion required for world-class real estate transactions.
             </p>
 
             <div className="flex flex-col sm:flex-row items-center gap-4 pt-4">
-              <button className="w-full sm:w-auto px-8 py-3.5 bg-white hover:bg-slate-50 text-slate-950 font-bold text-sm rounded-full transition shadow-md cursor-pointer text-center">
+              <Link
+                to="/agents"
+                className="w-full sm:w-auto px-8 py-3.5 bg-white hover:bg-slate-100 text-[#002045] font-bold text-sm rounded-full transition shadow-md text-center"
+              >
                 Speak with an Advisor
-              </button>
-              <button className="w-full sm:w-auto px-8 py-3.5 bg-transparent hover:bg-white/5 text-white font-bold text-sm rounded-full border border-slate-700/80 transition cursor-pointer text-center">
+              </Link>
+              <Link
+                to="/concierge"
+                className="w-full sm:w-auto px-8 py-3.5 bg-transparent hover:bg-white/10 text-white font-bold text-sm rounded-full border border-slate-600 transition text-center"
+              >
                 Our Process
-              </button>
+              </Link>
             </div>
           </div>
 

@@ -19,17 +19,29 @@ export const getAuthToken = () => {
 }
 
 export const apiRequest = async (path, options = {}) => {
+  const token = getAuthToken()
+
+  // Default headers
+  const headers = {
+    ...(options.body && !(options.body instanceof FormData) ? { 'Content-Type': 'application/json' } : {}),
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    ...(options.headers || {}),
+  }
+
   const response = await fetch(buildUrl(path), {
     ...options,
-    headers: {
-      'Content-Type': 'application/json',
-      ...(getAuthToken() ? { Authorization: `Bearer ${getAuthToken()}` } : {}),
-      ...(options.headers || {}),
-    },
+    headers,
   })
 
+  // Handle 204 No Content
+  if (response.status === 204) {
+    return null
+  }
+
   const contentType = response.headers.get('content-type') || ''
-  const payload = contentType.includes('application/json') ? await response.json() : await response.text()
+  const payload = contentType.includes('application/json')
+    ? await response.json()
+    : await response.text()
 
   if (!response.ok) {
     const message = typeof payload === 'string' ? payload : payload?.message || 'Request failed'

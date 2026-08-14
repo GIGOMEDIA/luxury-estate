@@ -9,28 +9,39 @@ import { apiRequest } from '../lib/backend'
 import { useBackendData } from '../hooks/useBackendData'
 
 const CuratedCollections = () => {
-  const { data } = useBackendData(async () => {
+  const { data, loading, error } = useBackendData(async () => {
     const [collections, articles] = await Promise.all([
-      apiRequest('/collections/featured'),
-      apiRequest('/collections/articles'),
+      apiRequest('/collections/featured').catch(() => ({ items: [] })),
+      apiRequest('/collections/articles').catch(() => ({ items: [] })),
     ])
 
     return {
-      collections: collections.items || [],
-      articles: articles.items || [],
+      collections: collections?.items || collections || [],
+      articles: articles?.items || articles || [],
     }
   }, [])
 
   return (
-    <div className="min-h-screen bg-white">
-      <Navbar />
+    <div className="min-h-screen bg-white flex flex-col justify-between">
+      <div>
+        <Navbar />
 
-      <main>
-        <CollectionsHero />
-        <CollectionsGrid collections={data?.collections || []} />
-        <BespokeAdvisory />
-        <CuratorialJournal articles={data?.articles || []} />
-      </main>
+        <main>
+          <CollectionsHero />
+
+          {error && (
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+              <div className="p-4 bg-red-50 border border-red-200 text-red-700 text-sm rounded-xl">
+                Unable to load collections at this time. Please try again later.
+              </div>
+            </div>
+          )}
+
+          <CollectionsGrid collections={data?.collections} loading={loading} />
+          <BespokeAdvisory />
+          <CuratorialJournal articles={data?.articles} loading={loading} />
+        </main>
+      </div>
 
       <Footer />
     </div>

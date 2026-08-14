@@ -20,7 +20,7 @@ const Footer = () => {
             <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Explore</h4>
             <ul className="space-y-2.5 text-xs sm:text-sm text-slate-300 font-medium">
               <li><Link to="/properties" className="hover:text-white transition">Global Search</Link></li>
-              <li><Link to="/membership-plans" className="hover:text-white transition">Investment Guide</Link></li>
+              <li><Link to="/dashboard" className="hover:text-white transition">Investment Guide</Link></li>
               <li><Link to="/collections" className="hover:text-white transition">City Guides</Link></li>
             </ul>
           </div>
@@ -37,9 +37,9 @@ const Footer = () => {
           <div className="lg:col-span-3 space-y-4">
             <h4 className="text-[10px] font-bold uppercase tracking-widest text-slate-400">Legal</h4>
             <ul className="space-y-2.5 text-xs sm:text-sm text-slate-300 font-medium">
-              <li><Link to="/privacy-policy" className="hover:text-white transition">Privacy Policy</Link></li>
-              <li><Link to="/terms-of-service" className="hover:text-white transition">Terms of Service</Link></li>
-              <li><Link to="/fair-housing" className="hover:text-white transition">Fair Housing</Link></li>
+              <li><Link to="/concierge" className="hover:text-white transition">Privacy Policy</Link></li>
+              <li><Link to="/concierge" className="hover:text-white transition">Terms of Service</Link></li>
+              <li><Link to="/concierge" className="hover:text-white transition">Fair Housing</Link></li>
             </ul>
           </div>
 
@@ -51,10 +51,10 @@ const Footer = () => {
           </p>
 
           <div className="flex items-center gap-4 text-slate-400">
-            <button className="hover:text-white transition cursor-pointer">
+            <button className="hover:text-white transition cursor-pointer" aria-label="Global Language">
               <Globe className="w-4 h-4" />
             </button>
-            <button className="hover:text-white transition cursor-pointer">
+            <button className="hover:text-white transition cursor-pointer" aria-label="Share Page">
               <Share2 className="w-4 h-4" />
             </button>
           </div>

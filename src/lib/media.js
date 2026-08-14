@@ -1,4 +1,5 @@
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
+
 import PrimaryEstateView from '../assets/primary-estate-view.png'
 import InteriorView from '../assets/interior-view.png'
 import KitchenView from '../assets/kitchen.png'
@@ -60,6 +61,14 @@ export const resolveMediaUrl = (value) => {
   return value
 }
 
-export const resolvePropertyImage = (property) => resolveMediaUrl(property?.image || property?.heroImageUrl)
+export const resolvePropertyImage = (property) => {
+  if (!property) return ''
+  const val = property.heroImageUrl || property.image || property.imageUrl || property.coverImageUrl || property.img
+  return resolveMediaUrl(val)
+}
 
-export const resolveAgentImage = (agent) => resolveMediaUrl(agent?.photoUrl || agent?.image || agent?.avatarUrl)
+export const resolveAgentImage = (agent) => {
+  if (!agent) return ''
+  const val = agent.photoUrl || agent.image || agent.avatarUrl || agent.imageUrl || agent.photo
+  return resolveMediaUrl(val)
+}
